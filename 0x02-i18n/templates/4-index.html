@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ _('home_title') }}</title>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
 </head>
 <body>
-    <h1>{{ _('home_header') }}</h1>
+    {% if g.user %}
+        <p>{% if g.user.locale == 'fr' %}
+            Vous êtes connecté en tant que {{ g.user.name }}.
+        {% else %}
+            You are logged in as {{ g.user.name }}.
+        {% endif %}</p>
+    {% else %}
+        <p>{% if request.args.get('locale') == 'fr' %}
+            Vous n'êtes pas connecté.
+        {% else %}
+            You are not logged in.
+        {% endif %}</p>
+    {% endif %}
 </body>
 </html>
